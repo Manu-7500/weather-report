@@ -3,6 +3,28 @@ const form = document.querySelector( "form" )
 const search = document.querySelector( "#search" )
 const weather = document.querySelector( "#weather" )
 
+var Date = new Date();
+var h = Date.getHours();
+var m = Date.getMinutes();
+var session = "AM";
+if ( h == 0 ) {
+    h = 12;
+}
+if ( h > 12 ) {
+    h = h - 12;
+    session = "PM";
+}
+if ( h < 10 ) { h = "0" + h; }
+if ( m < 10 ) { m = "0" + m; }
+
+document.getElementById( "time" ).innerHTML = h + ":" + m + " " + session;
+
+var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var day = weekdays[Date.getDay()];
+document.getElementById( "day" ).innerHTML = day;
+
+
+
 const getweather = async ( city ) => {
     weather.innerHTML = `<h2>Loading...</h2>`
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_key}&units=metric`
